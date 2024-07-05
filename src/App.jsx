@@ -1,17 +1,46 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Home } from "lucide-react";
+import { Hash, Home, Plus } from "lucide-react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Layout from "./layouts/default"; // available: default, navbar, sidebar
+import Layout from "./layouts/sidebar";
 import Index from "./pages/Index.jsx";
+
 const queryClient = new QueryClient();
 
 export const navItems = [
   {
-    title: "Home", // Feel free to change this to your liking
+    title: "General",
     to: "/",
-    icon: <Home className="h-4 w-4" />,
+    icon: <Hash className="h-4 w-4" />,
+  },
+  {
+    title: "Random",
+    to: "/random",
+    icon: <Hash className="h-4 w-4" />,
+  },
+];
+
+export const servers = [
+  {
+    id: "1",
+    name: "Home",
+    icon: <Home className="h-6 w-6" />,
+  },
+  {
+    id: "2",
+    name: "Server 1",
+    icon: "S1",
+  },
+  {
+    id: "3",
+    name: "Server 2",
+    icon: "S2",
+  },
+  {
+    id: "add",
+    name: "Add Server",
+    icon: <Plus className="h-6 w-6" />,
   },
 ];
 
@@ -24,7 +53,6 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Index />} />
-              {/* Add more routes here as needed */}
             </Route>
           </Routes>
         </Router>
