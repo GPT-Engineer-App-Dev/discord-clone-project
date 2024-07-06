@@ -24,13 +24,10 @@ const Layout = () => {
   };
 
   return (
-    <div className={cn(
-      "grid min-h-screen w-full",
-      isSidebarCollapsed ? "lg:grid-cols-[72px_1fr]" : "lg:grid-cols-[72px_240px_1fr]"
-    )}>
+    <div className="flex min-h-screen w-full">
       <ServerSidebar activeServer={activeServer} setActiveServer={setActiveServer} />
       <ChannelSidebar isCollapsed={isSidebarCollapsed} toggleSidebar={toggleSidebar} />
-      <div className="flex flex-col">
+      <div className="flex flex-col flex-grow">
         <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-6">
           <div className="flex items-center gap-2">
             <MessageSquare className="h-5 w-5" />
@@ -65,7 +62,7 @@ const Layout = () => {
 };
 
 const ServerSidebar = ({ activeServer, setActiveServer }) => (
-  <div className="flex flex-col items-center space-y-4 py-4 bg-secondary">
+  <div className="flex flex-col items-center space-y-4 py-4 bg-secondary w-16">
     {servers.map((server) => (
       <Tooltip key={server.id} delayDuration={0}>
         <TooltipTrigger asChild>
@@ -91,7 +88,7 @@ const ServerSidebar = ({ activeServer, setActiveServer }) => (
 const ChannelSidebar = ({ isCollapsed, toggleSidebar }) => (
   <div className={cn(
     "flex flex-col border-r bg-muted/40 transition-all duration-300",
-    isCollapsed ? "w-0 overflow-hidden" : "w-60"
+    isCollapsed ? "w-16" : "w-60"
   )}>
     <div className="p-4 font-semibold flex justify-between items-center">
       <span className={cn(isCollapsed ? "hidden" : "block")}>Server Name</span>
@@ -122,7 +119,7 @@ const NavItem = ({ to, icon, children, isCollapsed }) => (
     }
   >
     {icon}
-    {!isCollapsed && children}
+    {!isCollapsed && <span>{children}</span>}
   </NavLink>
 );
 
